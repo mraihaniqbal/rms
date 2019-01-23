@@ -19,8 +19,6 @@ import java.util.Optional;
 public class UserServlet extends AbstractController
 {
 
-    private static final String LIST_URI = BASE_URI+"/users/list";
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
@@ -29,20 +27,25 @@ public class UserServlet extends AbstractController
         if(!GeneralHelper.isLoggedIn(req)){
             req.setAttribute("msg","You are not allowed to access the page.");
             path = getTemplatePath("/login");
+        }else{
+
+            req.setAttribute("loggedUser",req.getSession().getAttribute("userId"));
+
+            if ("/list".equals(req.getPathInfo())) {
+                list(req);
+            } else if (req.getPathInfo().contains("/form")) {
+                if(req.getParameter("username") != null){
+                    update(req);
+                }else{
+                    req.setAttribute("path","add");
+                }
+            }else if( req.getPathInfo().equals("/delete")){
+                path = getTemplatePath(req.getServletPath()+"/list");
+                delete(req);
+            }
+
         }
 
-        if ("/list".equals(req.getPathInfo())) {
-            list(req);
-        } else if (req.getPathInfo().contains("/form")) {
-            if(req.getParameter("username") != null){
-                update(req);
-            }else{
-                req.setAttribute("path","add");
-            }
-        }else if( req.getPathInfo().equals("/delete")){
-            path = getTemplatePath(req.getServletPath()+"/list");
-            delete(req);
-        }
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(path);
         requestDispatcher.forward(req, resp);
@@ -98,6 +101,7 @@ public class UserServlet extends AbstractController
 
         if(opt.isPresent()){
             User user = opt.get();
+
             user.setUserName(req.getParameter("username"));
             user.setPassword(req.getParameter("password"));
 

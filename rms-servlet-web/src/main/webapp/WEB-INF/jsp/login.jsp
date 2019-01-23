@@ -26,7 +26,7 @@
 				<div class="mdl-card mdl-shadow--6dp">
 					<form action="login" method="post">
 						<div class="mdl-card__supporting-text">
-							${error != null ? error : ""}
+							${not empty msg ? msg : ""}
 								<div class="mdl-textfield mdl-js-textfield">
 									<input class="mdl-textfield__input" type="text" id="username" name="username" />
 									<label class="mdl-textfield__label" for="username">Username</label>

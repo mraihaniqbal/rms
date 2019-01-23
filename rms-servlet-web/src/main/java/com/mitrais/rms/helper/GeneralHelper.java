@@ -7,7 +7,7 @@ public class GeneralHelper {
 
     public static boolean isLoggedIn(HttpServletRequest req){
         HttpSession session = req.getSession();
-        return session.getAttribute("user") != null;
+        return session.getAttribute("userId") != null;
     }
 
 }

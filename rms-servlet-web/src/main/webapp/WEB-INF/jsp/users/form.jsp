@@ -15,7 +15,7 @@
 				</div>
 				<div class="mdl-textfield mdl-js-textfield">
 					<input class="mdl-textfield__input" type="password" id="userpass" name="password"
-						   value="${empty user ? '' : user.password}"/>
+						   value="${empty user ? '' : user.password}" ${loggedUser == user.id ? "readonly" : ""}/>
 					<label class="mdl-textfield__label" for="userpass">Password</label>
 				</div>
 			</div>

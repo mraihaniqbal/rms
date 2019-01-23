@@ -35,7 +35,8 @@ public class LoginServlet extends AbstractController
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        String path = getTemplatePath(req.getServletPath()+req.getPathInfo());
+
+        String path = getTemplatePath(req.getServletPath());
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(path);
 
         String username = req.getParameter("username");
@@ -56,19 +57,20 @@ public class LoginServlet extends AbstractController
                 }
 
                 HttpSession newSession = req.getSession(true);
-                newSession.setAttribute("user",username);
+                newSession.setAttribute("userId",user.getId());
 
                 //set inactive interval 10 mins
                 newSession.setMaxInactiveInterval(10*60);
-                resp.sendRedirect(BASE_URI);
+
+                resp.sendRedirect(LIST_URI);
 
             }else{
-                req.setAttribute("error","Password is incorrect");
-                requestDispatcher.forward(req, resp);
+                req.setAttribute("msg","Password is incorrect");
+                requestDispatcher.forward(req,resp);
             }
         }else{
-            req.setAttribute("error","Username is incorrect");
-            requestDispatcher.forward(req, resp);
+            req.setAttribute("msg","Username is incorrect");
+            requestDispatcher.forward(req,resp);
         }
 
     }

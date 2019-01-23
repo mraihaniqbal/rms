@@ -19,4 +19,15 @@
             <type>java.lang.String</type>
         </attribute>
     </tag>
+
+    <tag>
+        <name>script</name>
+        <tag-class>com.mitrais.rms.tag.Script</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>src</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
 </taglib>

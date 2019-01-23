@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
         <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <rms:script src="js/script.js"/>
         <rms:link type="stylesheet" href="css/styles.css"/>
         
         <!--[if lt IE 9]>
@@ -38,7 +39,6 @@
                         <% } else { %>
                             <%--Logged in Menu--%>
                             <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/users/list">Users</a>
-                            <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/users/profile">Profile</a>
                             <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/logout">Logout</a>
                             <%----%>
                         <% } %>
@@ -53,7 +53,6 @@
                     <% } else { %>
                         <%--Logged in Menu--%>
                         <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/users/list">Users</a>
-                        <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/users/profile">Profile</a>
                         <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/logout">Logout</a>
                         <%----%>
                     <% } %>
