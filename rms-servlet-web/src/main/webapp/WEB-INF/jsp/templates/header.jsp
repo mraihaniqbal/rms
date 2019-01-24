@@ -1,5 +1,3 @@
-<%@ page import="com.mitrais.rms.controller.AbstractController" %>
-<%@ page import="com.mitrais.rms.helper.GeneralHelper" %>
 <%@ page language="java" pageEncoding="UTF-8" session="false"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -34,7 +32,7 @@
                     <div class="mdl-layout-spacer"></div>
                     <!-- Navigation -->
                     <nav class="mdl-navigation">
-                        <% if(!GeneralHelper.isLoggedIn(request)){ %>
+                        <% if(request.getSession(false) == null){ %>
                             <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/login">Login</a>
                         <% } else { %>
                             <%--Logged in Menu--%>
@@ -48,7 +46,7 @@
             <div class="mdl-layout__drawer">
                 <span class="mdl-layout-title">RMS</span>
                 <nav class="mdl-navigation">
-                    <% if(!GeneralHelper.isLoggedIn(request)){ %>
+                    <% if(request.getSession(false) == null){ %>
                         <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/login">Login</a>
                     <% } else { %>
                         <%--Logged in Menu--%>

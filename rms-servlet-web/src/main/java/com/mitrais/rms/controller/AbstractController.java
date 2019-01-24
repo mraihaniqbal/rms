@@ -4,9 +4,6 @@ import javax.servlet.http.HttpServlet;
 
 public abstract class AbstractController extends HttpServlet
 {
-    protected static final String BASE_URI = "/rms";
-    protected static final String LIST_URI = BASE_URI+"/users/list";
-
     private static final String VIEW_PREFIX = "/WEB-INF/jsp";
     private static final String VIEW_SUFFIX = ".jsp";
 

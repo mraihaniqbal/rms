@@ -3,6 +3,7 @@ package com.mitrais.rms.dao;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -18,24 +19,24 @@ public class DataSourceFactory
     DataSourceFactory()
     {
 
+        MysqlDataSource dataSource = new MysqlDataSource();
         // TODO: make these database setting configurable by moving to properties file
         Properties prop = new Properties();
         try{
             prop.load(getClass().getResourceAsStream("/database.properties"));
-        }catch (Exception e){
+
+            dataSource.setDatabaseName(prop.getProperty("db.name"));
+            dataSource.setServerName(prop.getProperty("db.server"));
+            dataSource.setPort(Integer.parseInt(prop.getProperty("db.port")));
+            dataSource.setUser(prop.getProperty("db.username"));
+            dataSource.setPassword(prop.getProperty("db.password"));
+
+        }catch (IOException e){
             System.out.println("File tidak ditemukan");
             e.printStackTrace();
         }
 
-        MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setDatabaseName(prop.getProperty("db.name"));
-        dataSource.setServerName(prop.getProperty("db.server"));
-        dataSource.setPort(Integer.parseInt(prop.getProperty("db.port")));
-        dataSource.setUser(prop.getProperty("db.username"));
-        dataSource.setPassword(prop.getProperty("db.password"));
-
         this.dataSource = dataSource;
-
     }
 
     /**
